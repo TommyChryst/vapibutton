@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Call Routing Switch</title>
+</head>
+<body>
+    <h1>Call Routing</h1>
+    <label for="routingSwitch">Route calls to Number 1:</label>
+    <input type="checkbox" id="routingSwitch" name="routingSwitch" onchange="toggleRouting()">
+
+    <script>
+        function toggleRouting() {
+            const routingStatus = document.getElementById('routingSwitch').checked;
+            fetch('/toggle-routing', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ routeToNumber1: routingStatus }),
+            }).then(response => response.json())
+              .then(data => {
+                  console.log('Success:', data);
+              })
+              .catch((error) => {
+                  console.error('Error:', error);
+              });
+        }
+    </script>
+</body>
+</html>
